@@ -64,7 +64,6 @@ public class MainProgramPanel extends JFrame
     private JLabel averageTurnaroundTimeLabel;
     private JLabel totalExecutionTimeLabel;
     private JTextField ganttChartTextField;
-    private JButton printToFileButton;
     private int algorithm;
     private int language;
     private int speed;
@@ -91,8 +90,6 @@ public class MainProgramPanel extends JFrame
     private FCFSForward fcfsForward;
     private SJFWorker sjfWorker;
     private SJFForward sjfForward;
-    private PriorityWorker priorityWorker;
-    private PriorityForward priorityForward;
     private RRWorker rrWorker;
     private RRForward rrForward;
     private SRTFWorker srtfWorker;
@@ -216,12 +213,7 @@ public class MainProgramPanel extends JFrame
         s1 = "Pause";
         s2 = "D\u1eebng";
         this.pauseButton = new JButton();
-        if (language == 0) {
             this.pauseButton.setText("Pause");
-        }
-        else if (language == 1) {
-            this.pauseButton.setText("D\u1eebng");
-        }
         this.pauseButton.setSize(80, 25);
         this.pauseButton.setLocation(410, 30);
         this.pauseButton.setFocusable(false);
@@ -229,60 +221,35 @@ public class MainProgramPanel extends JFrame
         this.pauseButton.setEnabled(false);
         this.add(this.pauseButton);
         this.backButton = new JButton();
-        if (language == 0) {
             this.backButton.setText("Back");
-        }
-        else {
-            this.backButton.setText("Quay l\u1ea1i");
-        }
         this.backButton.setSize(80, 25);
         this.backButton.setFocusable(false);
         this.backButton.setOpaque(false);
         this.backButton.setLocation(410, 70);
         this.add(this.backButton);
         this.simulateButton = new JButton();
-        if (language == 0) {
             this.simulateButton.setText("Simulate");
-        }
-        else {
-            this.simulateButton.setText("M\u00f4 ph\u1ecfng");
-        }
         this.simulateButton.setSize(100, 65);
         this.simulateButton.setLocation(520, 30);
         this.simulateButton.setOpaque(false);
         this.simulateButton.setFocusable(false);
         this.add(this.simulateButton);
         this.forwardButton = new JButton();
-        if (language == 0) {
             this.forwardButton.setText("Forward");
-        }
-        else {
-            this.forwardButton.setText("T\u1edbi");
-        }
         this.forwardButton.setSize(100, 65);
         this.forwardButton.setLocation(660, 30);
         this.forwardButton.setOpaque(false);
         this.forwardButton.setFocusable(false);
         this.add(this.forwardButton);
         this.exitButton = new JButton();
-        if (language == 0) {
             this.exitButton.setText("Exit");
-        }
-        else {
-            this.exitButton.setText("Tho\u00e1t");
-        }
         this.exitButton.setSize(80, 25);
         this.exitButton.setLocation(790, 30);
         this.exitButton.setFocusable(false);
         this.exitButton.setOpaque(false);
         this.add(this.exitButton);
         this.againButton = new JButton();
-        if (language == 0) {
             this.againButton.setText("Again");
-        }
-        else if (language == 1) {
-            this.againButton.setText("L\u1eb7p l\u1ea1i");
-        }
         this.againButton.setSize(80, 25);
         this.againButton.setLocation(790, 70);
         this.againButton.setFocusable(false);
@@ -342,18 +309,6 @@ public class MainProgramPanel extends JFrame
         ganttChartScrollPane.setLocation(25, 625);
         ganttChartScrollPane.setAutoscrolls(true);
         this.add(ganttChartScrollPane);
-        this.printToFileButton = new JButton();
-        if (language == 0) {
-            this.printToFileButton.setText("Print To File");
-        }
-        else if (language == 1) {
-            this.printToFileButton.setText("In ra file");
-        }
-        this.printToFileButton.setFocusable(false);
-        this.printToFileButton.setOpaque(false);
-        this.printToFileButton.setSize(100, 80);
-        this.printToFileButton.setLocation(770, 605);
-        this.add(this.printToFileButton);
         this.remainingBurstTimeLabel = new JLabel[this.progressBars.length];
         for (int count3 = 0; count3 < this.remainingBurstTimeLabel.length; ++count3) {
             (this.remainingBurstTimeLabel[count3] = new JLabel()).setSize(30, 25);
@@ -395,7 +350,6 @@ public class MainProgramPanel extends JFrame
         this.backButton.addActionListener(handler);
         this.againButton.addActionListener(handler);
         this.forwardButton.addActionListener(handler);
-        this.printToFileButton.addActionListener(handler);
         final ChangeHandler changeHandler = new ChangeHandler();
         this.simulationSpeedSlider.addChangeListener(changeHandler);
         this.quantiumTimeSlider.addChangeListener(changeHandler);
@@ -453,10 +407,6 @@ public class MainProgramPanel extends JFrame
         mainProgramPanel.rrWorker = rrWorker;
     }
     
-    static /* synthetic */ void access$27(final MainProgramPanel mainProgramPanel, final PriorityWorker priorityWorker) {
-        mainProgramPanel.priorityWorker = priorityWorker;
-    }
-    
     static /* synthetic */ void access$31(final MainProgramPanel mainProgramPanel, final boolean isPaused) {
         mainProgramPanel.isPaused = isPaused;
     }
@@ -475,10 +425,6 @@ public class MainProgramPanel extends JFrame
     
     static /* synthetic */ void access$39(final MainProgramPanel mainProgramPanel, final SJFForward sjfForward) {
         mainProgramPanel.sjfForward = sjfForward;
-    }
-    
-    static /* synthetic */ void access$41(final MainProgramPanel mainProgramPanel, final PriorityForward priorityForward) {
-        mainProgramPanel.priorityForward = priorityForward;
     }
     
     static /* synthetic */ void access$43(final MainProgramPanel mainProgramPanel, final RRForward rrForward) {
@@ -529,21 +475,10 @@ public class MainProgramPanel extends JFrame
                     MainProgramPanel.access$25(MainProgramPanel.this, new RRWorker(MainProgramPanel.this.processes, MainProgramPanel.this.ganttChartTextField, rrSolver.getGanttChart(), MainProgramPanel.this.cpuStateTextField, rrSolver.getCPUStates(), MainProgramPanel.this.againButton, MainProgramPanel.this.totalExecutionTimeLabel, MainProgramPanel.this.progressBars, rrSolver.getValueProgressList(), rrSolver.getProcessProgressList(), rrSolver.getReadyQueueList(), MainProgramPanel.this.readyQueueTextField, MainProgramPanel.this.remainingBurstTimeLabel, rrSolver.getRemainingBurstTimeList(), rrSolver.getRemainingBurstTimePositionList(), rrSolver.getWaitingTimePositionList(), rrSolver.getWaitingTimeList(), MainProgramPanel.this.waitingTimeOfProcessesLabel, MainProgramPanel.this.averageWaitingTimeLabel, MainProgramPanel.this.averageTurnaroundTimeLabel, MainProgramPanel.this.pauseButton, MainProgramPanel.this.simulationSpeedSlider.getValue() * 10, MainProgramPanel.this.quantiumTimeSlider, MainProgramPanel.this.language));
                     MainProgramPanel.this.rrWorker.execute();
                 }
-                else if (MainProgramPanel.this.algorithm == 4) {
-                    final SolvePriority prioritySolver = new SolvePriority(MainProgramPanel.this.processes);
-                    prioritySolver.solve();
-                    MainProgramPanel.access$27(MainProgramPanel.this, new PriorityWorker(prioritySolver.getProcesses(), MainProgramPanel.this.ganttChartTextField, prioritySolver.getGanttChart(), MainProgramPanel.this.cpuStateTextField, prioritySolver.getCPUStates(), MainProgramPanel.this.againButton, MainProgramPanel.this.totalExecutionTimeLabel, MainProgramPanel.this.progressBars, prioritySolver.getValueProgressList(), prioritySolver.getProcessProgressList(), prioritySolver.getReadyQueueList(), MainProgramPanel.this.readyQueueTextField, MainProgramPanel.this.remainingBurstTimeLabel, prioritySolver.getRemainingBurstTimeList(), prioritySolver.getRemainingBurstTimePositionList(), prioritySolver.getWaitingTimePositionList(), prioritySolver.getWaitingTimeList(), MainProgramPanel.this.waitingTimeOfProcessesLabel, MainProgramPanel.this.averageWaitingTimeLabel, MainProgramPanel.this.averageTurnaroundTimeLabel, MainProgramPanel.this.pauseButton, MainProgramPanel.this.simulationSpeedSlider.getValue() * 10, MainProgramPanel.this.language));
-                    MainProgramPanel.this.priorityWorker.execute();
-                }
             }
             else if (event.getSource() == MainProgramPanel.this.exitButton) {
                 int choice = 0;
-                if (MainProgramPanel.this.language == 0) {
                     choice = JOptionPane.showConfirmDialog(MainProgramPanel.this, "Do you want to exit?", "Select an option", 1);
-                }
-                else if (MainProgramPanel.this.language == 1) {
-                    choice = JOptionPane.showConfirmDialog(MainProgramPanel.this, "B\u1ea1n c\u00f3 mu\u1ed1n tho\u00e1t?", "T\u00f9y ch\u1ecdn", 1);
-                }
                 if (choice == 0) {
                     System.exit(0);
                 }
@@ -556,21 +491,13 @@ public class MainProgramPanel extends JFrame
                     else if (MainProgramPanel.this.algorithm == 1) {
                         MainProgramPanel.this.sjfWorker.pause();
                     }
-                    else if (MainProgramPanel.this.algorithm == 4) {
-                        MainProgramPanel.this.priorityWorker.pause();
-                    }
                     else if (MainProgramPanel.this.algorithm == 3) {
                         MainProgramPanel.this.rrWorker.pause();
                     }
                     else if (MainProgramPanel.this.algorithm == 2) {
                         MainProgramPanel.this.srtfWorker.pause();
                     }
-                    if (MainProgramPanel.this.language == 0) {
                         MainProgramPanel.this.pauseButton.setText("Resume");
-                    }
-                    else if (MainProgramPanel.this.language == 1) {
-                        MainProgramPanel.this.pauseButton.setText("Kh\u00f4i ph\u1ee5c");
-                    }
                     MainProgramPanel.access$31(MainProgramPanel.this, true);
                 }
                 else if (MainProgramPanel.this.isPaused) {
@@ -580,21 +507,13 @@ public class MainProgramPanel extends JFrame
                     else if (MainProgramPanel.this.algorithm == 1) {
                         MainProgramPanel.this.sjfWorker.resume();
                     }
-                    else if (MainProgramPanel.this.algorithm == 4) {
-                        MainProgramPanel.this.priorityWorker.resume();
-                    }
                     else if (MainProgramPanel.this.algorithm == 3) {
                         MainProgramPanel.this.rrWorker.resume();
                     }
                     else if (MainProgramPanel.this.algorithm == 2) {
                         MainProgramPanel.this.srtfWorker.resume();
                     }
-                    if (MainProgramPanel.this.language == 0) {
                         MainProgramPanel.this.pauseButton.setText("Pause");
-                    }
-                    else if (MainProgramPanel.this.language == 1) {
-                        MainProgramPanel.this.pauseButton.setText("D\u1eebng");
-                    }
                     MainProgramPanel.access$31(MainProgramPanel.this, false);
                 }
             }
@@ -660,13 +579,6 @@ public class MainProgramPanel extends JFrame
                             MainProgramPanel.this.sjfForward.forward();
                             break;
                         }
-                        case 4: {
-                            final SolvePriority prioritySolver2 = new SolvePriority(MainProgramPanel.this.processes);
-                            prioritySolver2.solve();
-                            MainProgramPanel.access$41(MainProgramPanel.this, new PriorityForward(MainProgramPanel.this.processes, MainProgramPanel.this.ganttChartTextField, prioritySolver2.getGanttChart(), MainProgramPanel.this.cpuStateTextField, prioritySolver2.getCPUStates(), MainProgramPanel.this.againButton, MainProgramPanel.this.totalExecutionTimeLabel, MainProgramPanel.this.progressBars, prioritySolver2.getValueProgressList(), prioritySolver2.getProcessProgressList(), prioritySolver2.getReadyQueueList(), MainProgramPanel.this.readyQueueTextField, MainProgramPanel.this.remainingBurstTimeLabel, prioritySolver2.getRemainingBurstTimeList(), prioritySolver2.getRemainingBurstTimePositionList(), prioritySolver2.getWaitingTimePositionList(), prioritySolver2.getWaitingTimeList(), MainProgramPanel.this.waitingTimeOfProcessesLabel, MainProgramPanel.this.averageWaitingTimeLabel, MainProgramPanel.this.averageTurnaroundTimeLabel, MainProgramPanel.this.pauseButton, MainProgramPanel.this.forwardButton, MainProgramPanel.this.language));
-                            MainProgramPanel.this.priorityForward.forward();
-                            break;
-                        }
                         case 3: {
                             MainProgramPanel.this.quantiumTimeSlider.setEnabled(false);
                             final SolveRR rrSolver2 = new SolveRR(MainProgramPanel.this.processes, MainProgramPanel.this.quantiumTimeSlider.getValue());
@@ -694,10 +606,6 @@ public class MainProgramPanel extends JFrame
                             MainProgramPanel.this.sjfForward.forward();
                             break;
                         }
-                        case 4: {
-                            MainProgramPanel.this.priorityForward.forward();
-                            break;
-                        }
                         case 3: {
                             MainProgramPanel.this.rrForward.forward();
                             break;
@@ -706,46 +614,6 @@ public class MainProgramPanel extends JFrame
                             MainProgramPanel.this.srtfForward.forward();
                             break;
                         }
-                    }
-                }
-            }
-            else if (event.getSource() == MainProgramPanel.this.printToFileButton) {
-                final JFileChooser fileChooser = new JFileChooser();
-                final int choice2 = fileChooser.showSaveDialog(MainProgramPanel.this);
-                if (choice2 == 0) {
-                    final File file = fileChooser.getSelectedFile();
-                    if (file.exists()) {
-                        if (file.isFile()) {
-                            final String fileName = file.getName();
-                            if (fileName.matches(".*txt")) {
-                                Formatter output = null;
-                                try {
-                                    output = new Formatter(file);
-                                    final String text = MainProgramPanel.this.ganttChartTextField.getText();
-                                    output.format("%s", text);
-                                }
-                                catch (FileNotFoundException ex) {
-                                    JOptionPane.showMessageDialog(MainProgramPanel.this, "Sorry, file not found.\nPlease try again.", "Error", 0);
-                                    return;
-                                }
-                                finally {
-                                    output.close();
-                                }
-                                output.close();
-                            }
-                            else {
-                                JOptionPane.showMessageDialog(MainProgramPanel.this, "Only support file .txt", "Error", 0);
-                            }
-                        }
-                        else {
-                            JOptionPane.showMessageDialog(MainProgramPanel.this, "Only support file .txt", "Error", 0);
-                        }
-                    }
-                    else if (MainProgramPanel.this.language == 0) {
-                        JOptionPane.showMessageDialog(MainProgramPanel.this, "File does not exist", "Error", 0);
-                    }
-                    else if (MainProgramPanel.this.language == 1) {
-                        JOptionPane.showMessageDialog(MainProgramPanel.this, "File kh\u00f4ng t\u1ed3n t\u1ea1i", "L\u1ed7i", 0);
                     }
                 }
             }
@@ -763,9 +631,6 @@ public class MainProgramPanel extends JFrame
                 }
                 else if (MainProgramPanel.this.algorithm == 1) {
                     MainProgramPanel.this.sjfWorker.setSleepTime(MainProgramPanel.this.simulationSpeedSlider.getValue() * 10);
-                }
-                else if (MainProgramPanel.this.algorithm == 4) {
-                    MainProgramPanel.this.priorityWorker.setSleepTime(MainProgramPanel.this.simulationSpeedSlider.getValue() * 10);
                 }
                 else if (MainProgramPanel.this.algorithm == 3) {
                     MainProgramPanel.this.rrWorker.setSleepTime(MainProgramPanel.this.simulationSpeedSlider.getValue() * 10);

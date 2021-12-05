@@ -85,11 +85,6 @@ public class RRWorker extends FCFSWorker
         this.againButton.setEnabled(true);
         this.pauseButton.setEnabled(false);
         this.quantiumTimeSlider.setEnabled(true);
-        if (this.language == 0) {
             JOptionPane.showMessageDialog(null, "Done!", "Notice", -1);
-        }
-        else if (this.language == 1) {
-            JOptionPane.showMessageDialog(null, "Ho\u00e0n t\u1ea5t!", "Th\u00f4ng b\u00e1o", -1);
-        }
     }
 }

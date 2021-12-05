@@ -38,7 +38,7 @@ public class Interface extends JFrame
     private JMenuItem secondPersionMenuItem;
     
     public Interface() {
-        algorithmNames = new String[] { "FCFS", "SJF", "SRTF", "Round Robin", "Priority" };
+        algorithmNames = new String[] { "FCFS", "SJF", "SRTF", "Round Robin"};
         try {
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         }
@@ -102,10 +102,6 @@ public class Interface extends JFrame
         return this.algorithmCombobox.getSelectedIndex() == 3;
     }
     
-    public boolean isPrioritySelected() {
-        return this.algorithmCombobox.getSelectedIndex() == 4;
-    }
-    
     class ActionHandler implements ActionListener
     {
         @Override
@@ -142,8 +138,6 @@ public class Interface extends JFrame
                 }else if(string.equals("SRTF")){
                     
                 }else if(string.equals("Round Robin")){
-                    
-                }else if(string.equals("Priority")){
                     
                 }
             }

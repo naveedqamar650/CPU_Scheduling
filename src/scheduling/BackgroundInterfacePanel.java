@@ -31,7 +31,7 @@ class BackgroundInterfacePanel extends JPanel
             this.backgroundImage = new ImageIcon(this.getClass().getResource("BackGround1.jpg"));
         }
         else if (selectedIndex == 1) {
-            this.backgroundImage = new ImageIcon(this.getClass().getResource("BackGround2.jpg"));
+            this.backgroundImage = new ImageIcon(this.getClass().getResource("BackGround1.jpg"));
         }
     }
 }
